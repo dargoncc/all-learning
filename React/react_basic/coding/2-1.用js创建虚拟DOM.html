@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2.jsx创建虚拟dom</title>
+</head>
+<body>
+	<div id="test"></div>
+
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+	<script type="text/babel" > 
+		const VDOM = React.createElement('h1',{id:'title'},React.createElement('span',null,'hello_react'))
+		ReactDOM.render(VDOM,document.getElementById('test'))
+	</script>
+</body>
+</html>
