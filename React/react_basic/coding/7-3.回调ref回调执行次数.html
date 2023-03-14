@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7-3.回调ref回调执行次数</title>
+</head>
+<body>
+	<!-- 准备好一个“容器” -->
+	<div id="test"></div>
+
+	<!-- 引入react核心库 -->
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<!-- 引入react-dom，用于支持react操作DOM -->
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="js/babel.min.js"></script>
+
+	<script type="text/babel" > /* 此处一定要写babel */
+		class Demo extends React.Component {
+            state = {isHot: true}
+            showData = () => {
+                const {input1} = this
+                alert(input1.value)
+            }
+            changeWeather = () => {
+                this.setState({isHot: !this.state.isHot})
+            }
+            saveInput = (c) => {
+                console.log('saveInput()', c);
+                this.input1 = c
+            }
+            render() {
+                const {isHot} = this.state
+                return (
+                    <div>
+                        <h2> 今天很{isHot ? '热' : '冷'}</h2>
+                        {/*<input ref={c => {this.input1 = c; console.log('@', c)}} type="text" placeholder="点击按钮提示数据" />  */ } 
+                       <input ref={this.saveInput} />
+                        <button onClick={this.showData}>点击提示输入</button>
+                        <button onClick={this.changeWeather}>点击切换</button>
+                    </div>
+                )
+            }
+        }
+		//2.渲染虚拟DOM到页面
+		ReactDOM.render(<Demo />,document.getElementById('test'))
+	</script>
+</body>
+</html>
