@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>9-2.不用柯里化实现</title>
+</head>
+<body>
+	<!-- 准备好一个“容器” -->
+	<div id="test"></div>
+
+	<!-- 引入react核心库 -->
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<!-- 引入react-dom，用于支持react操作DOM -->
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<!-- 引入babel，用于将jsx转为js -->
+	<script type="text/javascript" src="js/babel.min.js"></script>
+
+	<script type="text/babel" > 
+		class Login extends React.Component {
+			state = {
+				username:'',
+				password:''
+			}
+			saveFormData = (dataType, e) => {
+				this.setState({[dataType]:e.target.value})
+			}
+			handleSubmit = (e) => {
+				e.preventDefault()
+				const {username,password} = this.state
+				alert(`用户名：${username}，密码：${password}`)
+			}
+			render() {
+				return (
+					<form action="#" onSubmit={this.handleSubmit} >
+						用户名： <input onChange={e => this.saveFormData('username',e)} type="text" placeholder="请输入用户名" />
+						密码： <input onChange={e => this.saveFormData('password', e)} type="password" placeholder="请输入密码" />
+						<button>登录</button>
+					</form>
+				)
+			}
+		}
+		ReactDOM.render(<Login/>,document.getElementById('test'))
+	</script>
+</body>
+</html>
