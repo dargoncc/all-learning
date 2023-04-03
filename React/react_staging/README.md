@@ -115,4 +115,26 @@ render() {
 	接收参数： const {name, age} = this.props.location.state
 	备注：刷新也可以保留住参数
 
-### 
+### 编程式路由导航
+	借助 this.props.history 对象上的API对操作路由进行跳转，前进，后退
+		- this.props.history.push()
+		- this.props.history.replace()
+		- this.props.history.goBack()
+		- this.props.history.goForward()
+		- this.props.history.go()
+
+### withRouter 
+	`withRouter` 可以加工一般组件，让一般组件具备路由组件所特有的API
+	`withRouter` 返回值是一个新组件
+
+### BrowserRouter与HashRouter的区别
+1. 底层原理不一样：
+			BrowserRouter使用的是H5的history API，不兼容IE9及以下版本。
+			HashRouter使用的是URL的哈希值。
+2. path表现形式不一样
+			BrowserRouter的路径中没有#,例如：localhost:3000/demo/test
+			HashRouter的路径包含#,例如：localhost:3000/#/demo/test
+3. 刷新后对路由state参数的影响
+			(1).BrowserRouter没有任何影响，因为state保存在history对象中。
+			(2).HashRouter刷新后会导致路由state参数的丢失！！！
+4. 备注：HashRouter可以用于解决一些路径错误相关的问题。
