@@ -94,3 +94,25 @@ render() {
 	<Redirect to="/about"/>
 </Switch>
 ```
+
+### 嵌套路由
+1. 注册子路由时要写上父路由的path
+2. 路由的匹配是按照注册路由的顺序执行的
+
+### 想路由传递参数
+1. params 参数
+	路由链接(携带参数)：<Link to='/demo/test/tom/18'}>详情</Link>
+	注册路由(声明接收)：<Route path="/demo/test/:name/:age" component={Test}/>
+	接收参数： const {name, age} = this.props.match.params
+2. search 参数
+	路由链接(携带参数)：<Link to='/demo/test?name=tom&age=18'}>详情</Link>
+	注册路由(声明接收)：<Route path="/demo/test" component={Test}/>
+	接收参数： const {name, age} = this.props.location.search
+	备注：获取到的search 是 `urlencoded` 编码字符串，需要借助 `querystring` 解析
+3. state 参数
+	路由链接(携带参数)：<Link to={{pathname:'/demo/test',state:{name:'tom',age:18}}}>详情</Link>
+	注册路由(无需声明，正常注册即可)：<Route path="/demo/test" component={Test}/>
+	接收参数： const {name, age} = this.props.location.state
+	备注：刷新也可以保留住参数
+
+### 
