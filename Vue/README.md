@@ -69,3 +69,50 @@ Vue Create <ProjectName />
 ``` bash
 npm create vite@latest <ProjectName /> -- --template vue
 ```
+
+
+### ref 和 reactive 对比
+1. `ref` 支持所有类型；  `reactive` 仅支持引用类型 `Array` `Object` `Map` `Set`
+2. `ref` 取值赋值都需要加.value ；    `reactive` 不需要
+3. `reactive` `proxy` 不能直接赋值，否则会破坏响应式结构 
+  --- 解决方案：
+    数组可以使用push 加解构 
+    添加一个对象，把数组当做一个属性去解决
+
+```
+const list = reactive<string[]>(list)
+const res = ['RNG', 'LDG']
+list = res // 错误
+list.push(...res) //采用
+
+const list = reactive<{arr: string[]}>({
+  arr: []
+})
+```
+
+### toRef， toRefs
+toRef 只能修改响应式数据  非响应式视图毫无变化
+```
+const object = {name: '123', age: 18, like: 'JKlove'}
+const list = toRef(object, 'like')
+```
+应用场景，函数中传入reactive 对象，不能直接改变，需要使用 toRef 来进行解构
+```
+// 应用场景:
+const data = reactive({name: '123', age: 18,})
+const useDemo = (toRef(data, name)) => {
+  name.value = 'zhangsan'
+}
+```
+
+手写简单的 `toRefs`
+```
+const toRefs = <T extends object>(object : T) => {
+  const map:any = {}
+  for(let key in object) {
+    map[key] = toRef(Object, k)
+  }
+  return map
+}
+```
+
