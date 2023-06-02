@@ -77,3 +77,9 @@ flex 布局是把容器变成一个弹性容器，其中这个容器中的子元
 | flex: none    | flex: 0 0 auto |
 | flex: 1       | flex: 1 1 0%   |
 | flex: auto    | flex: 1 1 auto |
+
+# BFC
+
+# 居中
+
+# 层叠上下文
